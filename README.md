@@ -8,7 +8,8 @@ analysis, highlighting overloaded system resources by using colors,
 etcetera.
 
 [This project](https://github.com/xmartinez/atop-docker) builds a
-Docker image including the latest version of _atop_ (v2.5.0).
+[Docker image](https://hub.docker.com/r/xmhidalgo/atop) including the
+latest version of _atop_ (v2.5.0).
 
 The Docker image can be used to conveniently run the latest version of
 _atop_ on old systems and/or systems where the user does not have full
