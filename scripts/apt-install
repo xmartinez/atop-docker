@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+
+main() {
+    apt-get --quiet=2 update
+    apt-get --quiet=2 install --no-install-recommends "$@"
+    rm -rf /var/lib/apt/lists/*
+}
+
+main "$@"
