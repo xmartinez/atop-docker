@@ -16,6 +16,8 @@ RUN make -C atop-2.5.0 genericinstall BINPATH=/usr/local/bin
 ######################################################################
 FROM base as atop
 
-RUN apt-install libncurses6 libtinfo6 zlib1g
+RUN apt-install libncurses6 libtinfo6 s6 snooze zlib1g
 COPY --from=builder /usr/local/bin /usr/bin
+COPY service /service
+RUN install -d -m 755 /var/log/atop
 ENTRYPOINT ["/usr/bin/atop"]

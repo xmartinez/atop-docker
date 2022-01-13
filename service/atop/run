@@ -1,0 +1,28 @@
+#!/bin/bash
+set -euo pipefail
+exec 2>&1
+
+CURDAY=$(date +%Y%m%d)
+LOGPATH=/var/log/atop
+
+# Sampling interval and log retention.
+#
+# With default values (interval = 60 s, retention = 14 days), we have
+# the following estimated log size:
+#
+# - ~ 70 KiB/sample -> 100 MiB/day
+# - 14 days * 100 MiB/day -> 1.4 GiB
+#
+INTERVAL_S="${ATOP_INTERVAL_S:-60}"
+LOG_RETENTION_DAYS="${ATOP_LOG_RETENTION_DAYS:-14}"
+
+# Dump config.
+echo "atop: config: INTERVAL_S=${INTERVAL_S}" 1>&2
+echo "atop: config: LOG_RETENTION_DAYS=${LOG_RETENTION_DAYS}" 1>&2
+
+# Delete logfiles older than specified retention period.
+find $LOGPATH -name 'atop_*' -mtime +${LOG_RETENTION_DAYS} -exec rm -v {} \;
+
+# Activate atop, replacing the current shell.
+echo "atop: starting" 1>&2
+exec /usr/bin/atop -R -w $LOGPATH/atop_$CURDAY $INTERVAL_S

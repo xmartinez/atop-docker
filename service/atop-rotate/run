@@ -1,0 +1,7 @@
+#!/bin/bash
+set -euo pipefail
+exec 2>&1
+
+# Restart atop every midnight.
+exec snooze -v \
+     s6-svc -r /service/atop

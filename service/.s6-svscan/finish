@@ -1,0 +1,3 @@
+#!/bin/bash
+set -euo pipefail
+echo "s6: finish" 1>&2
