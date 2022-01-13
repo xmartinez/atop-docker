@@ -1,7 +1,7 @@
 # Project makefile
 
 REGISTRY := xmhidalgo/atop
-VERSION := 2.5.0-1
+VERSION := 2.5.0-2
 
 DOCKER_RUN := docker run --privileged --network=host --pid=host --uts=host --rm -it
 
